@@ -30,7 +30,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: garbage
-          path: ${{ github.workspace }}/result.zip
+          path: ${{ github.workspace }}/module.zip
           # args: zip -qq -r module.zip release/*
       - name: Publish
         uses: softprops/action-gh-release@v1
