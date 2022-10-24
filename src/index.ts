@@ -16,16 +16,16 @@ Hooks.once('ready', () => {
 
 
 Hooks.on('chatCommandsReady', () => {
-  game.chatCommands.registerCommand('/removeTokens', () => {
-
-      // game.actors.get(() => {})
-
-
-    // canvas?.tokens?.objects?.children?.forEach((token) => {
-    //   logger.info(token.actor)
-    // });
-
-    // canvas?.tokens.forEach((token) => logger.info(token))
-    canvas?.tokens?.controlled.forEach((token) => token.document.delete())
-   });
+  // game.chatCommands.registerCommand('/removeTokens', () => {
+  //   canvas?.tokens?.controlled.forEach((token) => token.document.delete())
+  //  });
 }) 
+
+Hooks.on('createToken', (token: Token) => {
+  const { id, actor } = token;
+  const tokens = canvas?.tokens?.getDocuments(); 
+  logger.info(`LLLLLL ${token.actor?.id}`)
+  const playerTokens = tokens?.filter((t) => t?.actor?.id === actor?.id)
+  const toRemove = playerTokens?.filter((token) => token.id !== id);
+  toRemove?.forEach((token) => token.delete())
+})
