@@ -37,5 +37,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            module.json
+            release/module.json
             module.zip
