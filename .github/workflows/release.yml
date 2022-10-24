@@ -28,9 +28,9 @@ jobs:
           recursive: false
           dest: module.zip
       - uses: actions/upload-artifact@v1
-          with:
-            name: garbage
-            path: ${{ github.workspace }}/result.zip
+        with:
+          name: garbage
+          path: ${{ github.workspace }}/result.zip
           # args: zip -qq -r module.zip release/*
       - name: Publish
         uses: softprops/action-gh-release@v1
