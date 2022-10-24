@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2016",                                
+    "module": "commonjs",                                
+    "rootDir": "./src",                                  
+    "outDir": "./script",  
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "types": [ "@league-of-foundry-developers/foundry-vtt-types"],
+    "moduleResolution": "node",                 
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true,            
+    "strict": true,                                      
+  },
+  "exclude": [
+    "./script/**/*"
+  ],
+  "include": [
+    "./src/**/*"
+  ]
+}
