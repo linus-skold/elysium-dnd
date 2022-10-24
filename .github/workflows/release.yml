@@ -27,7 +27,7 @@ jobs:
           files: release/ 
           recursive: false
           dest: module.zip
-        - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v1
           with:
             name: garbage
             path: ${{ github.workspace }}/result.zip
