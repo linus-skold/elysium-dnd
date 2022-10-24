@@ -12,12 +12,7 @@
     ],
     "version": "0.0.1",
     "minimumCoreVersion": "0.8.8",
-    "requires": [{
-        "id": "_chatcommands",
-        "type": "module",
-        "manifest": "https://github.com/League-of-Foundry-Developers/Chat-Commands-Lib/releases/download/1.2.0/module.json",
-        "compatibility": {
-          "verified": "1.2.0"
-        }
-      }]
+    "url": "https://github.com/OriginalDecode/elysium-dnd",
+    "download": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.zip",
+    "manifest": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.json"
 }
