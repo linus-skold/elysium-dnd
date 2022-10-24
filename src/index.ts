@@ -23,8 +23,9 @@ Hooks.on('chatCommandsReady', () => {
 
 Hooks.on('createToken', (token: Token) => {
   const { id, actor } = token;
-  const tokens = canvas?.tokens?.getDocuments(); 
-  const playerTokens = tokens?.filter((t) => t?.actor?.id === actor?.id)
-  const toRemove = playerTokens?.filter((token) => token.id !== id);
-  toRemove?.forEach((token) => token.delete())
+  const actorTokens = actor?.getActiveTokens();
+  if(actor?.type === 'character') {
+    const toRemove = actorTokens?.filter((token) => token.id !== id);
+    toRemove?.forEach((token) => token.document.delete())
+  }
 })
