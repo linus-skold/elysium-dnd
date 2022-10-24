@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+    "@types/ws": "^8.5.3",
     "esbuild": "^0.15.12",
     "eslint": "^8.26.0",
     "nodemon": "^2.0.20",
