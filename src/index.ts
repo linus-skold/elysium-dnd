@@ -1,7 +1,23 @@
 import ChatCommands from "./ChatCommands";
 import * as logger from './utils/logger'
 
-let socket;
+
+let socket: SocketlibSocket;
+let elysium: Elysium;
+
+class Elysium {
+  constructor() {
+    this._chatCommands = new ChatCommands();
+  }
+
+  private _chatCommands: ChatCommands
+
+  get commands() {
+    return this._chatCommands; 
+  }
+}
+
+
 
 Hooks.once("socketlib.ready", ()=>{
   socket = socketlib.registerModule("elysium");
@@ -10,38 +26,29 @@ Hooks.once("socketlib.ready", ()=>{
 })
 
 Hooks.once('ready', async () => {
-    const commands = new ChatCommands();
-
-
-    game.chatCommands = commands;
-
-    game.users.forEach((user) => {
-      logger.info(JSON.stringify(user, null, 2))
-    })
-
-    game.actors.forEach((actor) => {
-      // logger.info(JSON.stringify(actor, null, 2))
-      logger.info(actor.user)
-    })
+  if(!(game instanceof Game) ) return
+    
+    elysium = new Elysium()
 
 
     Hooks.on('chatMessage', (log:any, text:any, data:any) => {
-        return commands.handleChatMessage(log, text, data)
+        return elysium.commands.handleChatMessage(log, text, data)
     })
-
-    Hooks.callAll('chatCommandsReady', commands);
-
+    Hooks.callAll('chatCommandsReady', elysium.commands);
 })
 
 
 Hooks.on('chatCommandsReady', () => {
+  // elysium.commands.registerCommand()
   // game.chatCommands.registerCommand('/removeTokens', () => {
   //   canvas?.tokens?.controlled.forEach((token) => token.document.delete())
   //  });
 }) 
 
 Hooks.on('createToken', (token: Token, options: DocumentModificationContext, userId: string) => {
-  if(!game.user.isGM) return;
+  if(!(game instanceof Game) ) return
+
+  if(!game.user?.isGM) return;
   const { id, actor } = token;
   const actorTokens = actor?.getActiveTokens();
   if(actor?.type === 'character') {
@@ -53,12 +60,16 @@ Hooks.on('createToken', (token: Token, options: DocumentModificationContext, use
 
 
 function pullToScene(actorId: string, sceneId: string) {
-  const actor = game.actors.get(actorId)
+  if(!(game instanceof Game) ) return
+
+  const actor = game.actors?.get(actorId)
   if(!actor) return;
   if(actor.permission !== 3) return;
-  socket.executeAsGM("elysium.pullMeIn", game.user.id, sceneId);
+
+  socket.executeAsGM("elysium.pullMeIn", game.user?.id, sceneId);
 }
 
 function pullMeIn(userId: string, sceneId: string) {
-  game.socket.emit("pullToScene", sceneId, userId)
-} 
+  if(!(game instanceof Game) ) return
+  game.socket?.emit("pullToScene", sceneId, userId)
+}   
