@@ -11,7 +11,7 @@
         "scripts/module.js"
     ],
     "socket": true,
-    "version": "0.1.17",
+    "version": "0.2.2",
     "minimumCoreVersion": "9",
     "compatibleCoreVersion": "9",
     "url": "https://github.com/OriginalDecode/elysium-dnd",
