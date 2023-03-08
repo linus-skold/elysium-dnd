@@ -22,6 +22,7 @@ Hooks.on('createToken', (token: Token, options: DocumentModificationContext, use
   if(!game.user?.isGM) return;
   const { id, actor } = token;
   const actorTokens = actor?.getActiveTokens();
+  
   if(actor?.type === 'character') {
     const toRemove = actorTokens?.filter((token) => token.id !== id);
     toRemove?.forEach((token) => token.document.delete())
