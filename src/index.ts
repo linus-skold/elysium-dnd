@@ -3,12 +3,14 @@ import { Elysium, initializeElysium } from './lib/elysium'
 
 Hooks.once('ready', async () => {
   if(!(game instanceof Game) ) return;
-  initializeElysium()
+  initializeElysium(game);
 })
 
 
 Hooks.on('chatCommandsReady', () => {
-  // elysium.commands.registerCommand()
+  // elysium.commands.registerCommand("/elyConf", () => {
+    
+  // })
   // game.chatCommands.registerCommand('/removeTokens', () => {
   //   canvas?.tokens?.controlled.forEach((token) => token.document.delete())
   //  });
@@ -25,3 +27,4 @@ Hooks.on('createToken', (token: Token, options: DocumentModificationContext, use
     toRemove?.forEach((token) => token.document.delete())
   }
 })
+
