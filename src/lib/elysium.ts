@@ -51,21 +51,21 @@ export function initializeElysium(game: Game): Elysium {
   elysium = new Elysium();
   pts.initialize(game);
 
-  // game.settings.register("elysium", "Elysium", {
-  //   name: "Toggle move scene off",
-  //   hint: "your mom",
-  //   scope: "client",
-  //   config: true,
-  //   type: String,
-  //   choices: {
-  //     a: "Option A",
-  //     b: "Option B",
-  //   },
-  //   default: "a",
-  //   onChange: (value) => {
-  //     logger.info(value);
-  //   },
-  // });
+  game.settings.register("elysium", "Elysium", {
+    name: "Toggle move scene off",
+    hint: "",
+    scope: "client",
+    config: true,
+    type: String,
+    choices: {
+      a: "Option A",
+      b: "Option B",
+    },
+    default: "a",
+    onChange: (value) => {
+      logger.info(value);
+    },
+  });
 
   // elysium.registerCommand("elyConf", () => {
   //   logger.info("configuration boiiii");
