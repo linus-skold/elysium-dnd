@@ -2,11 +2,10 @@ import * as logger from '../utils/logger'
 
 export interface ChatCommand {
     command: string,
-    callback: () => void
+    callback: (...args: any) => void
 }
 
 export default class ChatCommands {
-
     constructor() {
         this._chatCommands = [];
     }
@@ -17,6 +16,10 @@ export default class ChatCommands {
         const exists = this._chatCommands.find((commands) => commands.command);
         if(!exists) {
             logger.info('Registering command: ' + command)
+            
+            if(command[0] !== '/')
+                command = `/${command}`
+
             this._chatCommands.push({command, callback})
         } else {
             logger.error("Command already registered!");
@@ -28,9 +31,7 @@ export default class ChatCommands {
         if(exist){
             logger.info(`Calling ${exist.command}`)
             exist.callback()
+            return false;
         }
-        return false
     }
-
-
 }
