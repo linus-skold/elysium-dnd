@@ -3,7 +3,6 @@ import * as logger from "../utils/logger";
 
 let _game: null | Game;
 
-
 Hooks.once("elysium.ready", (elysium: Elysium) => {
   const socket = socketlib.registerModule("elysium");
   elysium.setSocket(socket);
@@ -21,6 +20,7 @@ Hooks.on(
     if (!(_game instanceof Game)) return;
     if (!_game.user?.isGM) return;
     const { actor } = token;
+
     if (actor?.type === "character") {
       logger.info("GM is attempting to move character to new scene");
       try {
@@ -43,14 +43,38 @@ function pullToScene(actorId: string, sceneId: string) {
   const actor = _game.actors?.get(actorId);
   if (!actor) return;
   if (actor.permission !== 3) return;
+  logger.info(actorId);
 
-  elysium.socket?.executeAsGM("elysium.pullMeIn", _game.user?.id, sceneId);
+  elysium.socket?.executeAsGM(
+    "elysium.pullMeIn",
+    _game.user?.id,
+    sceneId,
+    canvas?.scene?.id,
+    actorId
+  );
 }
 
-function pullMeIn(userId: string, sceneId: string) {
+function pullMeIn(
+  userId: string,
+  sceneId: string,
+  currentSceneId: string,
+  actorId: string
+) {
   logger.info(`attempting to pull me in`);
   if (!(_game instanceof Game)) return;
-  logger.info(userId, sceneId);
+  if (currentSceneId !== sceneId) {
+    logger.info('mismatch attempting to remove oldtokens')
+    const oldScene = _game.scenes?.get(currentSceneId);
+    const oldToken = oldScene?.tokens.filter(
+      (token) =>
+        token.actor?.id === actorId && token.actor?.type === "character"
+    );
+
+    oldToken?.forEach((token) => {
+      token.delete();
+    });
+  }
+
   _game.socket?.emit("pullToScene", sceneId, userId);
 }
 
