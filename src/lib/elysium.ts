@@ -2,6 +2,10 @@ import ChatCommands from "./chatCommands";
 import * as pts from "./pullToScene";
 import * as logger from "../utils/logger";
 
+Hooks.on("canvasReady", () => {
+  logger.info("THE CANVAS IS LOADED SEBBE");
+})
+
 export class Elysium {
   constructor(game: Game) {
     this._gameRef = game;
@@ -34,9 +38,7 @@ export class Elysium {
       }
     });
 
-    Hooks.on("canvasReady", () => {
-      logger.info("THE CANVAS IS LOADED SEBBE");
-    })
+
 
 
   }
