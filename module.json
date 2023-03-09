@@ -11,7 +11,7 @@
     "scripts/module.js"
   ],
   "socket": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "url": "https://github.com/OriginalDecode/elysium-dnd",
   "download": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.zip",
   "manifest": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.json",
