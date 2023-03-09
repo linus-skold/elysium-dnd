@@ -1,26 +1,33 @@
 {
-    "name": "elysium",
-    "title": "Elysium Campaign Module",
-    "description": "Elysium Campaign module to make the DMs life easier hopefully",
-    "authors": [
-        {
-            "name": "OrignalDecode"
-        }
-    ],
-    "esmodules": [
-        "scripts/module.js"
-    ],
-    "socket": true,
-    "version": "0.2.2",
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
-    "url": "https://github.com/OriginalDecode/elysium-dnd",
-    "download": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.zip",
-    "manifest": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.json",
-    "dependencies": [{
-        "name": "socketlib",
+  "title": "Elysium Campaign Module",
+  "description": "Elysium Campaign module to make the DMs life easier hopefully",
+  "authors": [
+    {
+      "name": "OrignalDecode",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "socket": true,
+  "version": "0.3.0",
+  "url": "https://github.com/OriginalDecode/elysium-dnd",
+  "download": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.zip",
+  "manifest": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.json",
+  "id": "elysium",
+  "relationships": {
+    "requires": [
+      {
+        "id": "socketlib",
         "type": "module",
         "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/v1.0.10/module.json",
-        "version": "1.0.10"
-      }]
+        "compatibility": {}
+      }
+    ]
+  },
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  }
 }

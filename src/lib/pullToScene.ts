@@ -60,10 +60,10 @@ function pullMeIn(
   currentSceneId: string,
   actorId: string
 ) {
-  logger.info(`attempting to pull me in`);
   if (!(_game instanceof Game)) return;
+
   if (currentSceneId !== sceneId) {
-    logger.info('mismatch attempting to remove oldtokens')
+    logger.info('scene id mismatch attempting to remove old tokens')
     const oldScene = _game.scenes?.get(currentSceneId);
     const oldToken = oldScene?.tokens.filter(
       (token) =>
@@ -75,6 +75,8 @@ function pullMeIn(
     });
   }
 
+  if(_game.users?.find((user)=> user.id === userId))
+    elysium.setUserScene(userId, sceneId);
   _game.socket?.emit("pullToScene", sceneId, userId);
 }
 
