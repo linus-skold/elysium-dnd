@@ -11,7 +11,7 @@
     "scripts/module.js"
   ],
   "socket": true,
-  "version": "0.3.3",
+  "version": "0.4.0",
   "url": "https://github.com/OriginalDecode/elysium-dnd",
   "download": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.zip",
   "manifest": "https://github.com/OriginalDecode/elysium-dnd/releases/latest/download/module.json",
@@ -27,7 +27,7 @@
     ]
   },
   "compatibility": {
-    "minimum": "10",
+    "minimum": "9",
     "verified": "10"
   }
 }
