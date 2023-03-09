@@ -20,7 +20,6 @@ export class Elysium {
 
     Hooks.on("userConnected", (user: User, connected: boolean) => {
       if(!user || !user.id) return;
-
       const result = this._userSceneMap.get(user.id);
       logger.info(result)
       if(result) {
@@ -34,6 +33,12 @@ export class Elysium {
         }
       }
     });
+
+    Hooks.on("canvasReady", () => {
+      logger.info("THE CANVAS IS LOADED SEBBE");
+    })
+
+
   }
 
   private _chatCommands: ChatCommands;
