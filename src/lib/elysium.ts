@@ -4,43 +4,43 @@ import * as logger from "../utils/logger";
 
 Hooks.on("canvasReady", () => {
   logger.info("THE CANVAS IS LOADED SEBBE");
-})
+});
 
 export class Elysium {
   constructor(game: Game) {
     this._gameRef = game;
     this._chatCommands = new ChatCommands();
+    Hooks.callAll("chatCommandsReady", this._chatCommands);
 
     Hooks.on("chatMessage", (log: any, text: any, data: any) => {
       return this._chatCommands.handleChatMessage(log, text, data);
     });
 
-    Hooks.on("elysium.ready", (elysium: Elysium) => {
+    Hooks.once("elysium.ready", (elysium: Elysium) => {
       logger.info("elysium loaded");
-    });
+      this.registerSocketEvent("elysium.loaded", (user: string) => {
+        logger.info("Attempting to move user", user)
+        if (!user) return;
+        logger.info("There was a valid user")
 
-    Hooks.callAll("chatCommandsReady", this._chatCommands);
-    Hooks.callAll("elysium.ready", this);
-
-    Hooks.on("userConnected", (user: User, connected: boolean) => {
-      if(!user || !user.id) return;
-      const result = this._userSceneMap.get(user.id);
-      logger.info(result)
-      if(result) {
-        try {
-          setTimeout(()=>{
-            this._gameRef.socket?.emit("pullToScene", result, user.id);
-          }, 1000);
-        } catch(err) {
-          logger.info("Failed to do pullToScene")
-          logger.error(err)
+        const result = this._userSceneMap.get(user);
+        logger.info(result);
+        if (result) {
+          try {
+            setTimeout(() => {
+              this._gameRef.socket?.emit("pullToScene", result, user);
+            }, 1000);
+          } catch (err) {
+            logger.info("Failed to do pullToScene");
+            logger.error(err);
+          }
         }
+      });
+
+      if (!this._gameRef.user?.isGM) {
+        this._socket!.executeAsGM("elysium.loaded", this._gameRef.user?.id);
       }
     });
-
-
-
-
   }
 
   private _chatCommands: ChatCommands;
@@ -72,6 +72,13 @@ export class Elysium {
   setUserScene(userId: string, sceneId: string) {
     this._userSceneMap.set(userId, sceneId);
   }
+
+  registerSocketEvent(event: string, callback: any) {
+    if (!this._socket) {
+      this._socket = socketlib.registerModule("elysium");
+    }
+    this._socket.register(event, callback);
+  }
 }
 
 export let elysium: Elysium;
@@ -99,6 +106,6 @@ export function initializeElysium(game: Game): Elysium {
   // elysium.registerCommand("elyConf", () => {
   //   logger.info("configuration boiiii");
   // });
-
+  Hooks.callAll("elysium.ready", elysium);
   return elysium;
 }
