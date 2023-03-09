@@ -4,10 +4,8 @@ import * as logger from "../utils/logger";
 let _game: null | Game;
 
 Hooks.once("elysium.ready", (elysium: Elysium) => {
-  const socket = socketlib.registerModule("elysium");
-  elysium.setSocket(socket);
-  socket.register("elysium.pullToScene", pullToScene);
-  socket.register("elysium.pullMeIn", pullMeIn);
+  elysium.registerSocketEvent("elysium.pullToScene", pullToScene);
+  elysium.registerSocketEvent("elysium.pullMeIn", pullMeIn);
 });
 
 Hooks.once("socketlib.ready", () => {
