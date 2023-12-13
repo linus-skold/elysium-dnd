@@ -1,0 +1,40 @@
+name: 🐛 Bug Report
+description: Sample description for a bug report
+title: "<title>"
+labels: [issue:bug, issue:needs-triage]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: Please provide a clear and concise description of the issue.
+      placeholder: Describe the issue you are experiencing here.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide clear instructions on how to reproduce the issue.
+      placeholder: "1. Go to '...' \n2. Click on '....' \n3. Scroll down to '....' \n4. See error"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this issue?
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true

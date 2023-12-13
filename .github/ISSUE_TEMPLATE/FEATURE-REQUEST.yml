@@ -1,0 +1,27 @@
+name: 💡 Feature Request
+description: Create a feature request to help us improve
+title: "<title>"
+labels: [issue:enhancement, issue:needs-triage]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature description
+      description: Please provide a clear and concise description of the feature.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Basic example
+      description: How would we use this feature?
+    validations:
+      required: true
+  - type: textarea
+    id: drawbacks
+    attributes:
+      label: Drawbacks
+      description: Does this feature have any drawbacks or does it require us to change an existing feature?
+    validations:
+      required: true
+ 
