@@ -39,3 +39,7 @@ jobs:
           files: |
             release/module.json
             module.zip
+      
+      - name: Set Status Output
+        id: set-status
+        run: echo "::set-output name=status::${GITHUB_REF#refs/*/}"
